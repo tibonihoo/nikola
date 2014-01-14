@@ -25,9 +25,8 @@
 # SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 from __future__ import print_function
-from ast import literal_eval
 import codecs
-from datetime import datetime
+import datetime
 import os
 import sys
 import subprocess
@@ -88,17 +87,17 @@ class Deploy(Command):
         tzinfo = pytz.timezone(self.site.config['TIMEZONE'])
         try:
             with open(timestamp_path, 'rb') as inf:
-                last_deploy = literal_eval(inf.read().strip())
+                last_deploy = eval(inf.read().strip())
                 if tzinfo:
                     last_deploy = last_deploy.replace(tzinfo=tzinfo)
                 clean = False
         except Exception:
-            last_deploy = datetime(1970, 1, 1)
+            last_deploy = datetime.datetime(1970, 1, 1)
             if tzinfo:
                 last_deploy = last_deploy.replace(tzinfo=tzinfo)
             clean = True
 
-        new_deploy = datetime.now()
+        new_deploy = datetime.datetime.now()
         self._emit_deploy_event(last_deploy, new_deploy, clean, undeployed_posts)
 
         # Store timestamp of successful deployment
