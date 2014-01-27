@@ -14,6 +14,7 @@ matrix:
 env:
     NMODE=nikola
 install:
+  - "if [[ $NMODE == 'nikola' ]]; then pip install -f http://getnikola.com/wheels/ --use-wheel lxml pillow; fi"
   - "if [[ $NMODE == 'nikola' ]]; then pip install -r requirements-tests.txt --use-mirrors --use-wheel; fi"
   - "if [[ $NMODE == 'nikola' ]]; then pip install . --use-mirrors --use-wheel; fi"
   - "if [[ $NMODE == 'flake8' ]]; then pip install flake8 --use-mirrors --use-wheel; fi"
