@@ -14,9 +14,9 @@ matrix:
 env:
     NMODE=nikola
 install:
-  - "if [[ $NMODE == 'nikola' ]]; then pip install -r requirements-tests.txt --use-mirrors; fi"
-  - "if [[ $NMODE == 'nikola' ]]; then pip install . --use-mirrors; fi"
-  - "if [[ $NMODE == 'flake8' ]]; then pip install flake8 --use-mirrors; fi"
+  - "if [[ $NMODE == 'nikola' ]]; then pip install -r requirements-tests.txt --use-mirrors --use-wheel; fi"
+  - "if [[ $NMODE == 'nikola' ]]; then pip install . --use-mirrors --use-wheel; fi"
+  - "if [[ $NMODE == 'flake8' ]]; then pip install flake8 --use-mirrors --use-wheel; fi"
 # We run tests, nikola (to see if the command is executable) and flake8.
 script:
   - "if [[ $NMODE == 'nikola' ]]; then nosetests --with-coverage --cover-package=nikola --with-doctest --doctest-options=+NORMALIZE_WHITESPACE --logging-filter=-yapsy; fi"
